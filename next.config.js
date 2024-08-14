@@ -1,10 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-};
+    output: 'export',
+    // other configuration options
+}
 
-module.exports = {
-  distDir: "out",
-};
-
-// Check for this comment then everything is okay
+module.exports = nextConfig;
