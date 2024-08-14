@@ -2,10 +2,11 @@
   "name": "developer-portfolio-starter-code",
   "version": "0.1.0",
   "private": true,
+  "homepage": " https://github.com/omache/RenoxOmache.git",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npm start",
     "lint": "next lint",
     "export": "next export",
     "predeploy": "npm run build",
