@@ -1,0 +1,45 @@
+name: Deploy Next.js Application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js application
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages
+          folder: .next
+
+      - name: Create Git tag
+        id: create_tag
+        run: |
+          echo ::set-output name=tag::v${{ github.run_number }}
+
+      - name: Push Git tag
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: GitHub Actions
+          author_email: actions@github.com
+          message: "Deployed version ${{ steps.create_tag.outputs.tag }}"
+          add: "*.yaml"
+          tag: ${{ steps.create_tag.outputs.tag }}
